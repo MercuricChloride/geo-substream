@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package schema;
+
+message EntryAdded {
+  string id = 1; //{tx-hash}-{log-index}
+  string index = 2;
+  string uri = 3;
+  string author = 4;
+}
+
+message EntriesAdded {
+  repeated EntryAdded entries = 1;
+}

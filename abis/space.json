@@ -1,0 +1,24 @@
+[
+  {
+    "anonymous": false,
+    "name": "EntryAdded",
+    "type": "event",
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "index",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "uri",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "author",
+        "type": "address"
+      }
+    ]
+  }
+]
