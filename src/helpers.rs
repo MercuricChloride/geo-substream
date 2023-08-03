@@ -5,6 +5,10 @@
 use substreams::Hex;
 // use substreams_entity_change::tables::Tables;
 
+pub fn format_hex(address: &[u8]) -> String {
+    format!("0x{}", Hex(address).to_string())
+}
+
 // pub fn transfers_to_table_changes(tables: &mut Tables, transfers: &Transfers) {
 //     for transfer in transfers.transfers.iter() {
 //         // handle the transfer
@@ -56,7 +60,3 @@ use substreams::Hex;
 //         row.set("uri", &uri.value);
 //     }
 // }
-
-pub fn format_hex(address: &[u8]) -> String {
-    format!("0x{}", Hex(address).to_string())
-}

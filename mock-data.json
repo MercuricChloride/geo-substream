@@ -1,0 +1,46 @@
+{
+  "type": "root",
+  "version": "0.0.1",
+  "actions": [
+    {
+      "type": "createTriple",
+      "entityId": "82ae5e2b-e07d-4461-a88b-1158931e69b8",
+      "attributeId": "name",
+      "value": {
+        "type": "string",
+        "value": "Health",
+        "id": "c6383b57-0dac-4288-9b06-aa69ffa4d62e"
+      }
+    },
+    {
+      "type": "createTriple",
+      "entityId": "82ae5e2b-e07d-4461-a88b-1158931e69b8",
+      "attributeId": "space",
+      "value": {
+        "type": "string",
+        "value": "0xe3d08763498e3247EC00A481F199B018f2148723",
+        "id": "6089c737-32a8-4c51-b828-6949b92169b4"
+      }
+    },
+    {
+      "type": "createTriple",
+      "entityId": "3ad4df27-132f-4ef6-87f8-070f063b074c",
+      "attributeId": "name",
+      "value": {
+        "type": "string",
+        "value": "San Francisco",
+        "id": "2e1ff6d7-b58f-4d1f-949c-12e95b337af7"
+      }
+    },
+    {
+      "type": "createTriple",
+      "entityId": "3ad4df27-132f-4ef6-87f8-070f063b074c",
+      "attributeId": "space",
+      "value": {
+        "type": "string",
+        "value": "0xc46618C200f02EF1EEA28923FC3828301e63C4Bd",
+        "id": "a11bd17f-f3dd-4641-a6cb-68f09098dde7"
+      }
+    }
+  ]
+}

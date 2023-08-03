@@ -1,4 +1,4 @@
-ENDPOINT ?= mainnet.eth.streamingfast.io:443
+ENDPOINT ?= polygon.streamingfast.io:443
 
 .PHONY: build
 build:
@@ -6,7 +6,7 @@ build:
 
 .PHONY: stream
 stream: build
-	substreams run -e $(ENDPOINT) substreams.yaml map_block -s 12292922 -t +10
+	substreams run -e $(ENDPOINT) substreams.yaml map_entries_added
 
 .PHONY: protogen
 protogen:

@@ -1,8 +1,9 @@
 #[path = "./abi/space.rs"]
 mod space;
 
-mod helpers;
+pub mod helpers;
 mod pb;
+pub mod triples;
 
 use pb::schema::{EntriesAdded, EntryAdded};
 use space::events::EntryAdded as EntryAddedEvent;
@@ -41,47 +42,49 @@ fn map_entries_added(block: eth::v2::Block) -> Result<EntriesAdded, substreams::
     Ok(EntriesAdded { entries })
 }
 
-// #[substreams::handlers::map]
-// fn map_transfers(block: eth::v2::Block) -> Result<Transfers, substreams::errors::Error> {
-//     let transfers = block
-//         .logs()
-//         .filter_map(|log| {
-//             if format_hex(log.address()) == ADDRESS.to_lowercase() {
-//                 let tx_hash = format_hex(&log.receipt.transaction.hash);
-//                 let log_index = log.index();
-//                 let id = format!("{tx_hash}-{log_index}");
+/*
+#[substreams::handlers::map]
+fn map_transfers(block: eth::v2::Block) -> Result<Transfers, substreams::errors::Error> {
+    let transfers = block
+        .logs()
+        .filter_map(|log| {
+            if format_hex(log.address()) == ADDRESS.to_lowercase() {
+                let tx_hash = format_hex(&log.receipt.transaction.hash);
+                let log_index = log.index();
+                let id = format!("{tx_hash}-{log_index}");
 
-//                 if let Some(transfer) = TransferBatchEvent::match_and_decode(log) {
-//                     Some(TransferType::Batch(transfer, id))
-//                 } else if let Some(transfer) = TransferSingleEvent::match_and_decode(log) {
-//                     Some(TransferType::Single(transfer, id))
-//                 } else {
-//                     None
-//                 }
-//             } else {
-//                 None
-//             }
-//         })
-//         .map(|transfer_type| match transfer_type {
-//             TransferType::Single(transfer, id) => Transfer {
-//                 id,
-//                 operator: format_hex(&transfer.operator),
-//                 from: format_hex(&transfer.from),
-//                 to: format_hex(&transfer.to),
-//                 token_ids: vec![transfer.id.to_string()],
-//             },
-//             TransferType::Batch(transfer, id) => Transfer {
-//                 id,
-//                 operator: format_hex(&transfer.operator),
-//                 from: format_hex(&transfer.from),
-//                 to: format_hex(&transfer.to),
-//                 token_ids: transfer.ids.iter().map(|id| id.to_string()).collect(),
-//             },
-//         })
-//         .collect::<Vec<Transfer>>();
+                if let Some(transfer) = TransferBatchEvent::match_and_decode(log) {
+                    Some(TransferType::Batch(transfer, id))
+                } else if let Some(transfer) = TransferSingleEvent::match_and_decode(log) {
+                    Some(TransferType::Single(transfer, id))
+                } else {
+                    None
+                }
+            } else {
+                None
+            }
+        })
+        .map(|transfer_type| match transfer_type {
+            TransferType::Single(transfer, id) => Transfer {
+                id,
+                operator: format_hex(&transfer.operator),
+                from: format_hex(&transfer.from),
+                to: format_hex(&transfer.to),
+                token_ids: vec![transfer.id.to_string()],
+            },
+            TransferType::Batch(transfer, id) => Transfer {
+                id,
+                operator: format_hex(&transfer.operator),
+                from: format_hex(&transfer.from),
+                to: format_hex(&transfer.to),
+                token_ids: transfer.ids.iter().map(|id| id.to_string()).collect(),
+            },
+        })
+        .collect::<Vec<Transfer>>();
 
-//     Ok(Transfers { transfers })
-// }
+    Ok(Transfers { transfers })
+}
+*/
 
 // #[substreams::handlers::map]
 // fn map_approvals(block: eth::v2::Block) -> Result<Approvals, substreams::errors::Error> {
