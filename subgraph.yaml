@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: substreams
     name: substream_test
-    network: polygon
+    network: mainnet
     source:
       package:
         moduleName: graph_out
