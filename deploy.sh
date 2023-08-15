@@ -18,11 +18,17 @@ then
   exit 1
 fi
 
+# Make a backup of the original lib.rs
+cp src/lib.rs src/lib.rs.bak
+
 # Replace the DEFAULT_GEO_ADDRESS in src/lib.rs with the address of the contract
 sed -i '' "s/$DEFAULT_GEO_ADDRESS/$CONTRACT_ADDRESS/g" src/lib.rs
 
 # Build the WASM file
 cargo build --target wasm32-unknown-unknown --release
+
+# Restore the original lib.rs
+mv src/lib.rs.bak src/lib.rs
 
 # Pack the spkg
 substreams pack -o geo-substream.spkg
