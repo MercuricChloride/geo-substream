@@ -7,8 +7,13 @@ message EntryAdded {
   string index = 2;
   string uri = 3;
   string author = 4;
+  string space = 5;
 }
 
 message EntriesAdded {
   repeated EntryAdded entries = 1;
+}
+
+message Action {
+
 }

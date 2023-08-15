@@ -1,16 +1,16 @@
 specVersion: 0.0.4
-description: A generic ERC1155 subgraph built by @blind_nabler from the GraphBuildersDAO
-repository: https://github.com/MercuricChloride/erc1155-subgraph
+description: A geo space subgraph, this is a test for the new substreams architecture
+repository: https://github.com/MercuricChloride/geo-substream
 schema:
   file: schema.graphql
 dataSources:
   - kind: substreams
     name: substream_test
-    network: mainnet
+    network: polygon
     source:
       package:
         moduleName: graph_out
-        file: substream_test/substream.spkg
+        file: substream_test/geo-substream.spkg
     mapping:
       kind: substreams/graph-entities
       apiVersion: 0.0.5

@@ -25,23 +25,23 @@ use serde::{Deserialize, Serialize};
 
 // An action is a collection of action triples, this is used to represent a change to the graph.
 #[derive(Serialize, Deserialize, Debug)]
-pub struct Action<'a> {
+pub struct Action {
     /// Tbh I'm not sure why this is called type, but it is.
     #[serde(rename = "type")]
-    pub action_type: &'a str,
+    pub action_type: String,
     /// ???
-    pub version: &'a str,
+    pub version: String,
     /// The collection of action triples that make up this action.
-    pub actions: Vec<ActionTriple<'a>>,
+    pub actions: Vec<ActionTriple>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct ActionTriple<'a> {
+pub struct ActionTriple {
     #[serde(rename = "type")]
     pub action_triple_type: ActionTripleType,
-    pub entity_id: &'a str,
-    pub attribute_id: &'a str,
+    pub entity_id: String,
+    pub attribute_id: String,
     pub value: ActionTripleValue,
 }
 
@@ -93,7 +93,7 @@ pub enum ValueType {
     Null,
 }
 
-impl Action<'_> {
+impl Action {
     /// This function returns a vector of all the spaces that were created in this action.
     /// A space is created when we create an action triple describing a space, and the value is a string that is an address of the space
     pub fn get_created_spaces(&self) -> Vec<String> {
@@ -129,8 +129,7 @@ impl Action<'_> {
         }
         let data = uri.split("base64,").last().unwrap();
         let decoded = general_purpose::URL_SAFE.decode(data.as_bytes()).unwrap();
-        let decoded = Box::leak(decoded.into_boxed_slice());
-        let actions = serde_json::from_slice(decoded).unwrap();
+        let actions = serde_json::from_slice(&decoded).unwrap();
         actions
     }
 }

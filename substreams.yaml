@@ -16,7 +16,8 @@ protobuf:
 binaries:
   default:
     type: wasm/rust-v1
-    file: ./target/wasm32-unknown-unknown/release/substreams.wasm
+    file: ./target/wasm32-unknown-unknown/release/geo_substream.wasm
+
 
 modules:
   - name: map_entries_added
@@ -31,6 +32,6 @@ modules:
     kind: map
     initialBlock: 36472424
     inputs:
-      - source: sf.substreams.v1.Clock
+      - map: map_entries_added
     output:
       type: proto:substreams.entity.v1.EntityChanges
