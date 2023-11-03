@@ -6,7 +6,7 @@ build:
 
 .PHONY: stream
 stream: build
-	substreams run -e $(ENDPOINT) substreams.yaml map_entries_added
+	substreams run -e $(ENDPOINT) substreams.yaml geo_out
 
 .PHONY: protogen
 protogen:

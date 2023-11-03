@@ -3,7 +3,7 @@ syntax = "proto3";
 package schema;
 
 message EntryAdded {
-  string id = 1; //{tx-hash}-{log-index}
+  string id = 1; //{block-number}-{tx-hash}-{log-index}
   string index = 2;
   string uri = 3;
   string author = 4;
@@ -14,6 +14,39 @@ message EntriesAdded {
   repeated EntryAdded entries = 1;
 }
 
-message Action {
+enum Role {
+  NULL = 0;
+  MODERATOR = 1;
+  MEMBER = 2;
+  ADMIN = 3;
+}
 
+message RoleGranted {
+  string id = 1;
+  Role role = 2;
+  string account = 3;
+  string sender = 4;
+  string space = 5;
+}
+
+message RolesGranted {
+  repeated RoleGranted roles = 1;
+}
+
+message RoleRevoked {
+  string id = 1;
+  Role role = 2;
+  string account = 3;
+  string sender = 4;
+  string space = 5;
+}
+
+message RolesRevoked {
+  repeated RoleRevoked roles = 1;
+}
+
+message GeoOutput {
+  repeated EntryAdded entries = 1;
+  repeated RoleGranted roles_granted = 2;
+  repeated RoleRevoked roles_revoked = 3;
 }

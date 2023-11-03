@@ -8,7 +8,6 @@ imports:
 
 protobuf:
   files:
-    - block_meta.proto
     - schema.proto
   importPaths:
     - ./proto
@@ -17,7 +16,6 @@ binaries:
   default:
     type: wasm/rust-v1
     file: ./target/wasm32-unknown-unknown/release/geo_substream.wasm
-
 
 modules:
   - name: map_entries_added
@@ -28,6 +26,32 @@ modules:
     output:
       type: proto:schema.EntriesAdded
 
+  - name: map_roles_granted
+    kind: map
+    initialBlock: 36472424
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:schema.RolesGranted
+
+  - name: map_roles_revoked
+    kind: map
+    initialBlock: 36472424
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:schema.RolesRevoked
+
+  - name: geo_out
+    kind: map
+    initialBlock: 36472424
+    inputs:
+      - map: map_entries_added
+      - map: map_roles_granted
+      - map: map_roles_revoked
+    output:
+      type: proto:schema.GeoOutput
+
   - name: graph_out
     kind: map
     initialBlock: 36472424
@@ -35,3 +59,5 @@ modules:
       - map: map_entries_added
     output:
       type: proto:substreams.entity.v1.EntityChanges
+
+network: polygon
