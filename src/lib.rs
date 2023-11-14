@@ -32,7 +32,6 @@ const EDITOR_ROLE: [u8; 32] =
 fn map_entries_added(block: eth::v2::Block) -> Result<EntriesAdded, substreams::errors::Error> {
     let entries = block
         .logs()
-        .filter(|log| log.address() == ROOT_SPACE_ADDRESS)
         .filter_map(|log| {
             if let Some(entry) = EntryAddedEvent::match_and_decode(log) {
                 let tx_hash = format_hex(&log.receipt.transaction.hash);
@@ -61,7 +60,6 @@ fn map_entries_added(block: eth::v2::Block) -> Result<EntriesAdded, substreams::
 fn map_roles_granted(block: eth::v2::Block) -> Result<RolesGranted, substreams::errors::Error> {
     let roles: Vec<RoleGranted> = block
         .logs()
-        .filter(|log| log.address() == ROOT_SPACE_ADDRESS)
         .filter_map(|log| {
             if let Some(role_granted) = RoleGrantedEvent::match_and_decode(log) {
                 let tx_hash = format_hex(&log.receipt.transaction.hash);
@@ -96,7 +94,6 @@ fn map_roles_granted(block: eth::v2::Block) -> Result<RolesGranted, substreams::
 fn map_roles_revoked(block: eth::v2::Block) -> Result<RolesRevoked, substreams::errors::Error> {
     let roles: Vec<RoleRevoked> = block
         .logs()
-        .filter(|log| log.address() == ROOT_SPACE_ADDRESS)
         .filter_map(|log| {
             if let Some(role_revoked) = RoleRevokedEvent::match_and_decode(log) {
                 let tx_hash = format_hex(&log.receipt.transaction.hash);
