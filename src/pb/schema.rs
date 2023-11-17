@@ -22,6 +22,29 @@ pub struct EntriesAdded {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RoleChange {
+    #[prost(oneof="role_change::Change", tags="1, 2")]
+    pub change: ::core::option::Option<role_change::Change>,
+}
+/// Nested message and enum types in `RoleChange`.
+pub mod role_change {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        #[prost(message, tag="1")]
+        Granted(super::RoleGranted),
+        #[prost(message, tag="2")]
+        Revoked(super::RoleRevoked),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RoleChanges {
+    #[prost(message, repeated, tag="1")]
+    pub changes: ::prost::alloc::vec::Vec<RoleChange>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RoleGranted {
     #[prost(string, tag="1")]
     pub id: ::prost::alloc::string::String,
@@ -66,14 +89,12 @@ pub struct GeoOutput {
     #[prost(message, repeated, tag="1")]
     pub entries: ::prost::alloc::vec::Vec<EntryAdded>,
     #[prost(message, repeated, tag="2")]
-    pub roles_granted: ::prost::alloc::vec::Vec<RoleGranted>,
-    #[prost(message, repeated, tag="3")]
-    pub roles_revoked: ::prost::alloc::vec::Vec<RoleRevoked>,
+    pub role_changes: ::prost::alloc::vec::Vec<RoleChange>,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Role {
-    Null = 0,
+    NullRole = 0,
     Moderator = 1,
     Member = 2,
     Admin = 3,
@@ -85,7 +106,7 @@ impl Role {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Role::Null => "NULL",
+            Role::NullRole => "NULL_ROLE",
             Role::Moderator => "MODERATOR",
             Role::Member => "MEMBER",
             Role::Admin => "ADMIN",
@@ -94,7 +115,7 @@ impl Role {
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "NULL" => Some(Self::Null),
+            "NULL_ROLE" => Some(Self::NullRole),
             "MODERATOR" => Some(Self::Moderator),
             "MEMBER" => Some(Self::Member),
             "ADMIN" => Some(Self::Admin),

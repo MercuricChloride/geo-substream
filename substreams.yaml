@@ -26,19 +26,20 @@ modules:
     output:
       type: proto:schema.EntriesAdded
 
-  - name: map_roles_granted
-    kind: map
-    initialBlock: 36472424
+  - name: store_addresses
+    kind: store
+    updatePolicy: set_if_not_exists
+    valueType: string
     inputs:
-      - source: sf.ethereum.type.v2.Block
-    output:
-      type: proto:schema.RolesGranted
+      - map: map_entries_added
 
-  - name: map_roles_revoked
+  - name: map_roles
     kind: map
     initialBlock: 36472424
     inputs:
       - source: sf.ethereum.type.v2.Block
+      - store: store_addresses
+        mode: get
     output:
       type: proto:schema.RolesRevoked
 
@@ -47,8 +48,7 @@ modules:
     initialBlock: 36472424
     inputs:
       - map: map_entries_added
-      - map: map_roles_granted
-      - map: map_roles_revoked
+      - map: map_roles
     output:
       type: proto:schema.GeoOutput
 

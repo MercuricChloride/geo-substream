@@ -15,10 +15,21 @@ message EntriesAdded {
 }
 
 enum Role {
-  NULL = 0;
+  NULL_ROLE = 0;
   MODERATOR = 1;
   MEMBER = 2;
   ADMIN = 3;
+}
+
+message RoleChange {
+  oneof change {
+    RoleGranted granted = 1;
+    RoleRevoked revoked = 2;
+  }
+}
+
+message RoleChanges {
+  repeated RoleChange changes = 1;
 }
 
 message RoleGranted {
@@ -47,6 +58,5 @@ message RolesRevoked {
 
 message GeoOutput {
   repeated EntryAdded entries = 1;
-  repeated RoleGranted roles_granted = 2;
-  repeated RoleRevoked roles_revoked = 3;
+  repeated RoleChange role_changes = 2;
 }
