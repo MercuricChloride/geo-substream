@@ -1,10 +1,7 @@
 specVersion: v0.1.0
 package:
   name: "geo_substream"
-  version: v1.0.2
-
-imports:
-  entity: https://github.com/streamingfast/substreams-entity-change/releases/download/v0.2.1/substreams-entity-change-v0.2.1.spkg
+  version: v1.0.3
 
 protobuf:
   files:
@@ -51,13 +48,5 @@ modules:
       - map: map_roles
     output:
       type: proto:schema.GeoOutput
-
-  - name: graph_out
-    kind: map
-    initialBlock: 36472424
-    inputs:
-      - map: map_entries_added
-    output:
-      type: proto:substreams.entity.v1.EntityChanges
 
 network: polygon
